@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lieu de Rassamblement</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold:       #C5992A;
+      --gold-light: #EDD87A;
+      --gold-dark:  #A37D20;
+      --dark:       #1C1812;
+      --white:      #FFFFFF;
+      --cream:      #FAF8F3;
+      --cream-alt:  #FDFBF6;
+      --muted:      #5A5A5A;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'DM Sans',sans-serif; background:var(--white); color:var(--dark); overflow-x:hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position:sticky; top:0; z-index:100;
+      background:var(--white);
+      border-bottom:1px solid rgba(197,153,42,.18);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 60px; height:70px;
+    }
+    .logo { display:flex; align-items:center; gap:13px; text-decoration:none; }
+    .logo-mark {
+      width:40px; height:40px; border:1.5px solid var(--gold);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; color:var(--gold);
+    }
+    .logo-main { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; color:var(--dark); letter-spacing:.08em; line-height:1.2; }
+    .logo-sub  { font-size:9px; color:var(--gold); letter-spacing:.2em; text-transform:uppercase; font-weight:500; }
+    .nav-links { display:flex; gap:36px; list-style:none; }
+    .nav-links a { font-size:13px; font-weight:500; color:var(--muted); text-decoration:none; letter-spacing:.04em; transition:color .2s; }
+    .nav-links a:hover { color:var(--dark); }
+    .nav-cta {
+      display:inline-flex; align-items:center; gap:6px;
+      background:var(--gold); color:var(--white);
+      font-size:11.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+      padding:10px 22px; border-radius:2px; text-decoration:none; transition:background .2s;
+    }
+    .nav-cta:hover { background:#A37D20; }
+
+    /* ── HERO ── */
+    .hero {
+      background:var(--cream);
+      padding:100px 60px 90px;
+      display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+      min-height:92vh;
+    }
+    .hero-content { max-width:560px; }
+    .hero-tag { display:inline-flex; align-items:center; gap:10px; margin-bottom:28px; }
+    .hero-tag .hl { width:40px; height:1px; background:var(--gold); }
+    .hero-tag span { font-size:10.5px; font-weight:600; color:var(--gold); letter-spacing:.24em; text-transform:uppercase; }
+    .hero h1 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(44px,5vw,74px); font-weight:600; line-height:1.05;
+      color:var(--dark); margin-bottom:28px; letter-spacing:-.01em;
+    }
+    .hero h1 em { color:var(--gold); font-style:italic; }
+    .hero-sub { font-size:16px; line-height:1.78; color:var(--muted); margin-bottom:44px; font-weight:300; }
+    .hero-actions { display:flex; gap:16px; align-items:center; }
+    .btn-gold {
+      background:var(--gold); color:var(--white);
+      font-size:11.5px; font-weight:600; letter-spacing:.13em; text-transform:uppercase;
+      padding:14px 30px; border-radius:2px; text-decoration:none;
+      transition:background .2s, transform .15s;
+    }
+    .btn-gold:hover { background:#A37D20; transform:translateY(-2px); }
+    .btn-ghost {
+      color:var(--dark); font-size:13px; font-weight:500; text-decoration:none;
+      letter-spacing:.04em; border-bottom:1px solid var(--gold); padding-bottom:2px;
+      transition:color .2s;
+    }
+    .btn-ghost:hover { color:var(--gold); }
+
+    /* Hero visual */
+    .hero-visual { position:relative; height:480px; }
+    .hero-card-main {
+      position:absolute; top:0; right:0; width:85%; height:380px;
+      background:linear-gradient(160deg,var(--dark) 0%,#2C2416 100%);
+      border-radius:4px; display:flex; align-items:flex-end; padding:36px;
+      overflow:hidden;
+    }
+    .hero-card-main::before {
+      content:''; position:absolute; top:-30px; right:-30px;
+      width:220px; height:220px; border-radius:50%;
+      border:40px solid rgba(197,153,42,.1);
+    }
+    .hero-card-main::after {
+      content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+      background:repeating-linear-gradient(
+        -45deg,
+        transparent, transparent 20px,
+        rgba(197,153,42,.03) 20px, rgba(197,153,42,.03) 21px
+      );
+    }
+    .hc-label { font-size:10px; color:var(--gold); letter-spacing:.22em; text-transform:uppercase; margin-bottom:8px; }
+    .hc-text  { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:600; color:var(--white); line-height:1.2; }
+    .hero-card-mini {
+      position:absolute; bottom:0; left:0; width:54%;
+      background:var(--gold); padding:26px; border-radius:4px;
+    }
+    .mini-num { font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:700; color:var(--white); line-height:1; }
+    .mini-lbl { font-size:10px; color:rgba(255,255,255,.8); letter-spacing:.14em; text-transform:uppercase; margin-top:5px; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background:var(--dark); padding:48px 60px;
+      display:grid; grid-template-columns:repeat(4,1fr);
+      border-bottom:3px solid var(--gold);
+    }
+    .stat { text-align:center; }
+    .stat+.stat { border-left:1px solid rgba(255,255,255,.07); }
+    .stat-num { font-family:'Cormorant Garamond',serif; font-size:52px; font-weight:700; color:var(--gold); line-height:1; }
+    .stat-lbl { font-size:10px; color:rgba(255,255,255,.45); letter-spacing:.2em; text-transform:uppercase; margin-top:8px; }
+
+    /* ── GENERIC ── */
+    .stag { display:inline-flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .stag .sl { width:32px; height:1px; background:var(--gold); }
+    .stag span { font-size:10px; font-weight:600; color:var(--gold); letter-spacing:.24em; text-transform:uppercase; }
+    .stitle {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(30px,3.5vw,50px); font-weight:600; color:var(--dark); line-height:1.1;
+    }
+    .sdesc { font-size:15.5px; color:var(--muted); line-height:1.8; font-weight:300; margin-top:16px; }
+
+    /* ── MISSION ── */
+    .mission { padding:100px 60px; background:var(--white); }
+    .mission-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    .mission-vis {
+      background:var(--cream-alt); border-radius:4px;
+      border-top:3px solid var(--gold); padding:48px; position:relative; overflow:hidden;
+    }
+    .mission-vis-wm {
+      position:absolute; bottom:-20px; right:-10px;
+      font-family:'Cormorant Garamond',serif; font-size:100px; font-weight:700;
+      color:rgba(197,153,42,.06); line-height:1; pointer-events:none; user-select:none;
+    }
+    .mvalues { list-style:none; margin-top:8px; display:flex; flex-direction:column; gap:0; }
+    .mvalues li {
+      display:flex; align-items:flex-start; gap:16px;
+      padding:22px 0; border-bottom:1px solid rgba(197,153,42,.15);
+    }
+    .mvalues li:first-child { padding-top:0; }
+    .mvalues li:last-child  { border-bottom:none; padding-bottom:0; }
+    .mv-num { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:700; color:var(--gold); line-height:1; min-width:36px; }
+    .mv-text h4 { font-size:14px; font-weight:600; color:var(--dark); margin-bottom:4px; letter-spacing:.04em; }
+    .mv-text p  { font-size:13px; color:var(--muted); line-height:1.65; font-weight:300; }
+
+    /* ── PROGRAMMES ── */
+    .programmes { padding:100px 60px; background:var(--cream); }
+    .programmes-inner { max-width:1200px; margin:0 auto; }
+    .prog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:56px; }
+    .prog-card {
+      background:var(--white); border-radius:4px; overflow:hidden;
+      box-shadow:0 2px 20px rgba(0,0,0,.04);
+      display:flex; flex-direction:column;
+      transition:transform .2s, box-shadow .2s;
+    }
+    .prog-card:hover { transform:translateY(-5px); box-shadow:0 14px 44px rgba(0,0,0,.08); }
+    .prog-top { height:220px; position:relative; overflow:hidden; }
+    .prog-card:nth-child(1) .prog-top { background:linear-gradient(140deg,#1C1812,#2A2010); }
+    .prog-card:nth-child(2) .prog-top { background:linear-gradient(140deg,#0F1C2E,#1A2B44); }
+    .prog-card:nth-child(3) .prog-top { background:linear-gradient(140deg,#1A140A,#2E2212); }
+    .prog-emoji {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      font-size:54px; opacity:.8;
+    }
+    .prog-badge {
+      position:absolute; bottom:16px; left:16px;
+      background:var(--gold); color:var(--white);
+      font-size:9.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+      padding:5px 12px; border-radius:2px;
+    }
+    .prog-body { padding:28px; flex:1; display:flex; flex-direction:column; }
+    .prog-body h3 { font-family:'Cormorant Garamond',serif; font-size:25px; font-weight:600; color:var(--dark); margin-bottom:10px; }
+    .prog-body p  { font-size:13.5px; color:var(--muted); line-height:1.7; flex:1; font-weight:300; }
+    .prog-link {
+      display:inline-flex; align-items:center; gap:6px; margin-top:22px;
+      font-size:11px; font-weight:600; color:var(--gold);
+      text-decoration:none; letter-spacing:.12em; text-transform:uppercase;
+      transition:gap .15s;
+    }
+    .prog-link:hover { gap:10px; }
+
+    /* ── IMPACT (dark) ── */
+    .impact { background:var(--dark); padding:100px 60px; }
+    .impact-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+    .impact-quote { border-left:3px solid var(--gold); padding-left:36px; }
+    .impact-quote blockquote {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(24px,2.5vw,36px); font-weight:300; font-style:italic;
+      color:var(--white); line-height:1.55; margin-bottom:28px;
+    }
+    .impact-quote cite { font-size:11px; color:var(--gold); letter-spacing:.16em; text-transform:uppercase; font-style:normal; font-weight:600; }
+    .impact-right { display:flex; flex-direction:column; gap:18px; }
+    .impact-box {
+      background:rgba(255,255,255,.04); border:1px solid rgba(197,153,42,.18);
+      border-radius:4px; padding:26px 28px;
+      display:flex; align-items:center; gap:22px;
+    }
+    .impact-box-icon { font-size:30px; flex-shrink:0; }
+    .impact-box h4 { font-size:13px; font-weight:600; color:rgba(255,255,255,.85); letter-spacing:.04em; margin-bottom:4px; }
+    .impact-box p  { font-size:12.5px; color:rgba(255,255,255,.42); font-weight:300; line-height:1.55; }
+
+    /* ── TÉMOIGNAGES ── */
+    .temoignages { padding:100px 60px; background:var(--white); }
+    .temoignages-inner { max-width:1200px; margin:0 auto; }
+    .temo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:56px; }
+    .temo-card { background:var(--cream); border-radius:4px; padding:36px 32px; position:relative; }
+    .temo-card::before {
+      content:'"'; font-family:'Cormorant Garamond',serif;
+      font-size:80px; color:var(--gold); opacity:.2;
+      position:absolute; top:6px; left:22px; line-height:1;
+    }
+    .temo-text { font-size:14px; color:var(--muted); line-height:1.8; font-weight:300; font-style:italic; margin-bottom:28px; padding-top:24px; }
+    .temo-author { display:flex; align-items:center; gap:14px; }
+    .author-av {
+      width:42px; height:42px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:700;
+      color:var(--white); flex-shrink:0;
+    }
+    .av1 { background:linear-gradient(135deg,var(--gold),#A37D20); }
+    .av2 { background:linear-gradient(135deg,var(--dark),#2C2416); }
+    .av3 { background:linear-gradient(135deg,#3A5090,#1B2A5E); }
+    .author-name { font-size:13px; font-weight:600; color:var(--dark); }
+    .author-role { font-size:10.5px; color:var(--gold); letter-spacing:.08em; margin-top:2px; }
+
+    /* ── CTA ── */
+    .cta-section { background:var(--cream-alt); padding:100px 60px; text-align:center; position:relative; overflow:hidden; }
+    .cta-section::before {
+      content: 'PIEU'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      font-family:'Cormorant Garamond',serif; font-size:200px; font-weight:700;
+      color:rgba(197,153,42,.055); white-space:nowrap; pointer-events:none; user-select:none;
+    }
+    .cta-stag { justify-content:center; }
+    .cta-section .stitle { position:relative; }
+    .cta-section .sdesc  { position:relative; max-width:480px; margin:16px auto 44px; }
+    .cta-actions { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; position:relative; }
+    .btn-outline-gold {
+      background:transparent; border:1.5px solid var(--gold);
+      color:var(--gold); font-size:11.5px; font-weight:600;
+      letter-spacing:.13em; text-transform:uppercase;
+      padding:13px 28px; border-radius:2px; text-decoration:none;
+      transition:background .2s, color .2s;
+    }
+    .btn-outline-gold:hover { background:var(--gold); color:var(--white); }
+
+    /* ── FOOTER ── */
+    footer { background:var(--dark); padding:64px 60px 30px; }
+    .footer-top {
+      display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px;
+      padding-bottom:52px; border-bottom:1px solid rgba(197,153,42,.14); margin-bottom:28px;
+    }
+    .footer-logo-mark {
+      width:40px; height:40px; border:1.5px solid var(--gold);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:700; color:var(--gold);
+      margin-bottom:16px;
+    }
+    .footer-brand h4 { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; color:var(--white); letter-spacing:.08em; margin-bottom:12px; }
+    .footer-brand p  { font-size:13px; color:rgba(255,255,255,.38); line-height:1.7; font-weight:300; }
+    .fgold-line { width:32px; height:1px; background:var(--gold); margin-bottom:18px; }
+    .fcol h5 { font-size:9.5px; font-weight:600; color:var(--gold); letter-spacing:.24em; text-transform:uppercase; margin-bottom:20px; }
+    .fcol ul { list-style:none; display:flex; flex-direction:column; gap:12px; }
+    .fcol a  { font-size:13px; color:rgba(255,255,255,.38); text-decoration:none; font-weight:300; transition:color .2s; }
+    .fcol a:hover { color:var(--gold); }
+    .footer-bot { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:rgba(255,255,255,.22); }
+    .footer-bot .gd { color:var(--gold); font-weight:500; }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<nav>
+  <a href="Pieu.html" class="logo">
+    <div class="logo-mark">PK</div>
+    <div>
+      <div class="logo-main">Pieu Kegué</div>
+      <div class="logo-sub">Lieu de Rassemblement</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="mission.html">Mission</a></li>
+    <li><a href="programmes.html">Programmes</a></li>
+    <li><a href="impact.html">Impact</a></li>
+    <li><a href="temoignages.html">Témoignages</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">♡ S'Inscrire</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="hl"></span>
+      <span>Eglise de Jesu-Christ des Saints des derniers jours</span>
+    </div>
+    <h1>Éduquer <em>aujourd'hui</em>,<br>bâtir l'Afrique<br>de <em>demain</em></h1>
+    <p class="hero-sub">
+      Bienvenue au lieu de rassemblement de l'Eglise de Jesu-Christ des Saints des derniers jours
+    </p>
+    <div class="hero-actions">
+      <a href="formations.html" class="btn-gold">Découvrir nos programmes</a>
+      <a href="about.html" class="btn-ghost">A propos →</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-main">
+      <div>
+        <div class="hc-label">Notre vision</div>
+        <div class="hc-text">Une génération<br>formée, ancrée<br>&amp; engagée</div>
+      </div>
+    </div>
+    <div class="hero-card-mini">
+      <div class="mini-num">200+</div>
+      <div class="mini-lbl">Jeunes accompagnés</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── STATS BAR ─── -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">200+</div><div class="stat-lbl">Jeunes accompagnés</div></div>
+  <div class="stat"><div class="stat-num">7</div><div class="stat-lbl">Pays couverts</div></div>
+  <div class="stat"><div class="stat-num">12</div><div class="stat-lbl">Programmes actifs</div></div>
+  <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">Années d'impact</div></div>
+</div>
+
+<!-- ─── MISSION ─── -->
+<section class="mission">
+  <div class="mission-inner">
+    <div>
+      <div class="stag"><span class="sl"></span><span>Notre mission</span></div>
+      <h2 class="stitle">Créer les conditions<br>de l'excellence</h2>
+      <p class="sdesc">Nous croyons que chaque jeune africain porte en lui un potentiel extraordinaire. Notre rôle est de créer l'environnement où ce potentiel peut s'épanouir pleinement.</p>
+    </div>
+    <div class="mission-vis">
+      <div class="mission-vis-wm">PK</div>
+      <ul class="mvalues">
+        <li>
+          <span class="mv-num">01</span>
+          <div class="mv-text">
+            <h4>Excellence académique</h4>
+            <p>Bourses, encadrement pédagogique et suivi personnalisé pour chaque bénéficiaire.</p>
+          </div>
+        </li>
+        <li>
+          <span class="mv-num">02</span>
+          <div class="mv-text">
+            <h4>Ancrage identitaire</h4>
+            <p>Des valeurs profondément africaines comme boussole du développement personnel.</p>
+          </div>
+        </li>
+        <li>
+          <span class="mv-num">03</span>
+          <div class="mv-text">
+            <h4>Insertion professionnelle</h4>
+            <p>Mentorat, réseau et compétences pour une entrée réussie dans la vie active.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROGRAMMES ─── -->
+<section class="programmes">
+  <div class="programmes-inner">
+    <div class="stag"><span class="sl"></span><span>Ce que nous faisons</span></div>
+    <h2 class="stitle">Nos programmes phares</h2>
+    <p class="sdesc" style="max-width:500px;">Des initiatives concrètes, mesurables, profondément adaptées aux réalités du terrain.</p>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="prog-top">
+          <div class="prog-emoji">🎓</div>
+          <span class="prog-badge">Bourses</span>
+        </div>
+        <div class="prog-body">
+          <h3>Bourses d'excellence</h3>
+          <p>Financement partiel ou total des frais de scolarité pour des jeunes méritants issus de milieux défavorisés, du primaire au supérieur.</p>
+          <a href="#" class="prog-link">En savoir plus →</a>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-top">
+          <div class="prog-emoji">🤝</div>
+          <span class="prog-badge">Mentorat</span>
+        </div>
+        <div class="prog-body">
+          <h3>Mentorat professionnel</h3>
+          <p>Mise en relation des jeunes avec des mentors expérimentés — entrepreneurs, ingénieurs, médecins — pour un accompagnement sur-mesure.</p>
+          <a href="#" class="prog-link">En savoir plus →</a>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-top">
+          <div class="prog-emoji">💻</div>
+          <span class="prog-badge">Numérique</span>
+        </div>
+        <div class="prog-body">
+          <h3>Formation numérique</h3>
+          <p>Ateliers intensifs en développement web, design et entrepreneuriat digital pour préparer la jeunesse à l'économie de demain.</p>
+          <a href="#" class="prog-link">En savoir plus →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── IMPACT ─── -->
+<section class="impact">
+  <div class="impact-inner">
+    <div class="impact-quote">
+      <blockquote>"L'éducation est l'arme la plus puissante que vous puissiez utiliser pour changer le monde."</blockquote>
+      <cite>— Nelson Mandela</cite>
+    </div>
+    <div class="impact-right">
+      <div class="impact-box">
+        <span class="impact-box-icon">🏫</span>
+        <div>
+          <h4>Partenariats scolaires</h4>
+          <p>24 établissements partenaires à travers l'Afrique de l'Ouest pour étendre notre portée.</p>
+        </div>
+      </div>
+      <div class="impact-box">
+        <span class="impact-box-icon">🌍</span>
+        <div>
+          <h4>Présence régionale</h4>
+          <p>Bureaux actifs au Togo, au Bénin, au Ghana et en Côte d'Ivoire.</p>
+        </div>
+      </div>
+      <div class="impact-box">
+        <span class="impact-box-icon">📈</span>
+        <div>
+          <h4>Taux d'insertion</h4>
+          <p>78% de nos bénéficiaires trouvent un emploi ou lancent une activité dans les 12 mois.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TÉMOIGNAGES ─── -->
+<section class="temoignages">
+  <div class="temoignages-inner">
+    <div class="stag"><span class="sl"></span><span>Ils témoignent</span></div>
+    <h2 class="stitle">Des vies transformées</h2>
+    <div class="temo-grid">
+      <div class="temo-card">
+        <p class="temo-text">Grâce à la bourse d'Avenir Lumière, j'ai pu terminer mon master en informatique. Aujourd'hui je dirige une startup de 8 personnes à Lomé.</p>
+        <div class="temo-author">
+          <div class="author-av av1">K</div>
+          <div>
+            <div class="author-name">Kofi Mensah</div>
+            <div class="author-role">Fondateur, TechAfrik · Promo 2021</div>
+          </div>
+        </div>
+      </div>
+      <div class="temo-card">
+        <p class="temo-text">Le programme de mentorat m'a ouvert des portes que je n'aurais jamais pu ouvrir seule. Mon mentor m'a aidée à décrocher un stage à Dakar.</p>
+        <div class="temo-author">
+          <div class="author-av av2">A</div>
+          <div>
+            <div class="author-name">Amina Traoré</div>
+            <div class="author-role">Ingénieure financière · Promo 2022</div>
+          </div>
+        </div>
+      </div>
+      <div class="temo-card">
+        <p class="temo-text">La formation numérique a changé ma trajectoire. En 6 mois j'ai appris le développement web et trouvé mes premiers clients freelance en ligne.</p>
+        <div class="temo-author">
+          <div class="author-av av3">Y</div>
+          <div>
+            <div class="author-name">Yao Adjonou</div>
+            <div class="author-role">Développeur freelance · Promo 2023</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section">
+  <div class="stag cta-stag"><span class="sl"></span><span>Rejoignez le mouvement</span><span class="sl"></span></div>
+  <h2 class="stitle">Ensemble, transformons<br>une génération</h2>
+  <p class="sdesc">Que vous souhaitiez donner, vous porter volontaire ou partager notre mission — chaque geste compte.</p>
+  <div class="cta-actions">
+    <a href="#" class="btn-gold">♡ Faire un don</a>
+    <a href="#" class="btn-outline-gold">Devenir bénévole</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-mark">AL</div>
+      <h4>Avenir Lumière</h4>
+      <div class="fgold-line"></div>
+      <p>Une ONG dédiée à l'éducation et à l'épanouissement de la jeunesse africaine, depuis Lomé jusqu'au continent.</p>
+    </div>
+    <div class="fcol">
+      <h5>Organisation</h5>
+      <ul>
+        <li><a href="#">Notre histoire</a></li>
+        <li><a href="#">L'équipe</a></li>
+        <li><a href="#">Partenaires</a></li>
+        <li><a href="#">Rapports annuels</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Programmes</h5>
+      <ul>
+        <li><a href="#">Bourses d'excellence</a></li>
+        <li><a href="#">Mentorat</a></li>
+        <li><a href="#">Formation numérique</a></li>
+        <li><a href="#">Candidater</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="#">📍 Lomé, Togo</a></li>
+        <li><a href="#">📞 +228 00 00 00 00</a></li>
+        <li><a href="#">✉ contact@avenirlumiereong.org</a></li>
+        <li><a href="#">Nous écrire</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bot">
+    <span>© 2026 Avenir Lumière — Tous droits réservés</span>
+    <span class="gd">Éduquer · Inspirer · Bâtir</span>
+  </div>
+</footer>
+
+</body>
+</html>

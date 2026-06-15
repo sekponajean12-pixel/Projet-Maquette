@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact &amp; inscription — lieu de rassemblement</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="entete">
+    <div class="container">
+      <a href="index.html" class="logo">lieu de <span>rassemblement</span></a>
+
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-toggle-label">☰</label>
+
+      <nav class="nav-principale">
+        <a href="index.html">Accueil</a>
+        <a href="formations.html">Formations</a>
+      
+      </nav>
+
+      <a href="contact.html" class="bouton-nav">S'inscrire</a>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="container intro-page">
+      <span class="eyebrow">Contact &amp; inscription</span>
+      <h1>Parlons de ton avenir</h1>
+      <p class="lead">
+        Une question sur une formation, une visite à organiser ou tu es prêt à
+        t'inscrire ? Remplis le formulaire ci-dessous ou contacte-nous directement,
+        notre équipe te répond rapidement.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="container contact-grille">
+
+        <div>
+          <div class="bloc-coordonnees">
+
+            <div class="coordonnee">
+              <div class="coordonnee-icone">A</div>
+              <div>
+                <h4>Adresse</h4>
+                <p>123 lieu de rassemblement<br>Lomé, Togo</p>
+              </div>
+            </div>
+
+            <div class="coordonnee">
+              <div class="coordonnee-icone">T</div>
+              <div>
+                <h4>Téléphone</h4>
+                <p><a href="tel:+22890000000">+228 90 00 00 00</a></p>
+              </div>
+            </div>
+
+            <div class="coordonnee">
+              <div class="coordonnee-icone">M</div>
+              <div>
+                <h4>Email</h4>
+                <p><a href="mailto:contact@avenirjeunesse.org">contact@avenirjeunesse.org</a></p>
+              </div>
+            </div>
+
+            <div class="coordonnee">
+              <div class="coordonnee-icone">H</div>
+              <div>
+                <h4>Horaires d'accueil</h4>
+                <p>Lundi – Vendredi : 8h – 17h<br>Samedi : 9h – 13h</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="carte-placeholder">
+            Carte du centre lieu de rassemblement<br>123 lieu de rassemblement, Lomé
+          </div>
+        </div>
+
+        <form class="formulaire" action="#" method="post">
+          <div class="ligne-champs">
+            <div class="champ">
+              <label for="prenom">Prénom</label>
+              <input type="text" id="prenom" name="prenom" placeholder="Ton prénom" required>
+            </div>
+            <div class="champ">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" name="nom" placeholder="Ton nom" required>
+            </div>
+          </div>
+
+          <div class="champ">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="ton.email@exemple.com" required>
+          </div>
+
+          <div class="champ">
+            <label for="telephone">Téléphone</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="+228 ...">
+          </div>
+
+          <div class="champ">
+            <label for="formation">Formation souhaitée</label>
+            <select id="formation" name="formation">
+              <option value="">Sélectionne une formation</option>
+              <option value="web">Développement web</option>
+              <option value="cuisine">Cuisine</option>
+              <option value="patisserie">Pâtisserie</option>
+              <option value="onglerie">Onglerie</option>
+              <option value="tresse">Tresse &amp; coiffure</option>
+              <option value="autre">Je ne sais pas encore</option>
+            </select>
+          </div>
+
+          <div class="champ">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Dis-nous en plus sur ta demande..."></textarea>
+          </div>
+
+          <button type="submit" class="bouton bouton-primaire">Envoyer ma demande</button>
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pied">
+    <div class="container">
+      <div class="colonne-marque">
+        <h3>lieu de rassemblement</h3>
+        <p>Centre de formation pour les jeunes : développement web, cuisine, pâtisserie, onglerie et tresse. Apprendre un métier, gagner en confiance, construire son avenir.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="formations.html">Formations</a></li>
+          
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Lieu de rassemblement</li>
+          <li>Lomé, Togo</li>
+          <li><a href="mailto:contact@avenirjeunesse.org">contact@avenirjeunesse.org</a></li>
+          <li><a href="tel:+22890000000">+228 90 00 00 00</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bas-pied">© 2026 lieu de rassemblement — Tous droits réservés</div>
+  </footer>
+
+</body>
+</html>
